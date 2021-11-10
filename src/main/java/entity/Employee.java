@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,13 +30,7 @@ public class Employee {
         this.fName = fName;
         this.lName = lName;
         this.contactNumber = contactNumber;
-    }
-
-    public Employee(String fName, String lName, String contactNumber, List<Task> tareas) {
-        this.fName = fName;
-        this.lName = lName;
-        this.contactNumber = contactNumber;
-        this.tareas = tareas;
+        this.tareas = new ArrayList<Task>();
     }
 
     public long getId() {
@@ -67,7 +62,7 @@ public class Employee {
     }
 
     public void addTask(Task t){
-        this.tareas.add(t);
+        tareas.add(t);
         t.setEmployee(this);
     }
 
