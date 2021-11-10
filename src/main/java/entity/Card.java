@@ -15,24 +15,25 @@ public class Card {
     @Transient
     private TypeCard type;
     @OneToOne
-    @JoinColumn
+    @JoinColumn (name = "idemployee")
     private Employee empleado;
 
     public Card() {
     }
 
-    public Card(long id, String code, Employee empleado) {
-        this.id = id;
+    public Card(String code, TypeCard type, Employee empleado) {
         this.code = code;
+        this.type = type;
         this.empleado = empleado;
+    }
+
+    public Card(String code, TypeCard type) {
+        this.code = code;
+        this.type = type;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getCode() {
@@ -49,5 +50,13 @@ public class Card {
 
     public void setType(TypeCard type) {
         this.type = type;
+    }
+
+    public Employee getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Employee empleado) {
+        this.empleado = empleado;
     }
 }

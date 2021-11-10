@@ -4,35 +4,42 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table (name = "employees")
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    @Column (name = "idemployee")
     private long id;
+    @Column (name = "firstname")
     private String fName;
+    @Column (name = "lastname")
     private String lName;
-    @OneToMany (mappedBy = , cascade = , fetch = )
-    private List<Task> tareas;
-    @OneToOne
-    @JoinColumn
+    @Column (name = "contactnumber")
+    private  String contactNumber;
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn (name = "idcard")
     private Card tarjeta;
+    @OneToMany (mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Task> tareas;
 
     public Employee() {
     }
 
-    public Employee(long id, String fName, String lName, List<Task> tareas, Card tarjeta) {
-        this.id = id;
+    public Employee(String fName, String lName, String contactNumber) {
         this.fName = fName;
         this.lName = lName;
+        this.contactNumber = contactNumber;
+    }
+
+    public Employee(String fName, String lName, String contactNumber, List<Task> tareas) {
+        this.fName = fName;
+        this.lName = lName;
+        this.contactNumber = contactNumber;
         this.tareas = tareas;
-        this.tarjeta = tarjeta;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getfName() {
@@ -49,5 +56,39 @@ public class Employee {
 
     public void setlName(String lName) {
         this.lName = lName;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public void addTask(Task t){
+        this.tareas.add(t);
+        t.setEmployee(this);
+    }
+
+    public void removeTask(Task t) {
+        this.tareas.remove(t);
+        t.setEmployee(null);
+    }
+
+    public List<Task> getTareas() {
+        return tareas;
+    }
+
+    public void setTareas(List<Task> tareas) {
+        this.tareas = tareas;
+    }
+
+    public Card getTarjeta() {
+        return tarjeta;
+    }
+
+    public void setTarjeta(Card tarjeta) {
+        this.tarjeta = tarjeta;
     }
 }
