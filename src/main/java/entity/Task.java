@@ -3,6 +3,7 @@ package entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,9 +21,10 @@ public class Task {
     private LocalDate beginDate;
     @Column (name = "enddate")
     private LocalDate endDate;
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn (name = "idemployee")
     private Employee employee;
+
 
 
     public Task() {

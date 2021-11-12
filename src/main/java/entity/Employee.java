@@ -20,8 +20,12 @@ public class Employee {
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn (name = "idcard")
     private Card tarjeta;
-    @OneToMany (mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany (mappedBy = "employee", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+            , fetch = FetchType.LAZY)
     private List<Task> tareas;
+    @ManyToMany
+    @JoinTable (name = "emp_dep", joinColumns = @JoinColumn (name = ""))
+    private List<Department> ldepartments;
 
     public Employee() {
     }
@@ -31,6 +35,7 @@ public class Employee {
         this.lName = lName;
         this.contactNumber = contactNumber;
         this.tareas = new ArrayList<Task>();
+        this.ldepartments = new ArrayList<Department>();
     }
 
     public long getId() {
@@ -85,5 +90,9 @@ public class Employee {
 
     public void setTarjeta(Card tarjeta) {
         this.tarjeta = tarjeta;
+    }
+
+    public void addDepartment(Department d) {
+        ldepartments.add(d);
     }
 }
