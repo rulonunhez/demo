@@ -24,7 +24,9 @@ public class Employee {
             , fetch = FetchType.LAZY)
     private List<Task> tareas;
     @ManyToMany
-    @JoinTable (name = "emp_dep", joinColumns = @JoinColumn (name = ""))
+    @JoinTable (name = "emp_dep",
+            joinColumns = @JoinColumn (name = "idemployee"),
+            inverseJoinColumns = @JoinColumn (name = "iddepartment"))
     private List<Department> ldepartments;
 
     public Employee() {

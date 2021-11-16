@@ -11,9 +11,7 @@ public class Department {
     @Column (name = "department")
     private int id;
     private String name;
-    @ManyToMany
-    @JoinTable (name = "emp_dep", joinColumns = @JoinColumn (name = "iddeparment")
-            , inverseJoinColumns = @JoinColumn (name = "idemployee"))
+    @ManyToMany (mappedBy = "ldepartments")
     private List<Employee> lemployees;
 
     public Department(String name) {
