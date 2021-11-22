@@ -6,9 +6,13 @@ import java.util.List;
 
 @Entity
 @Table (name = "employees")
+@Inheritance (strategy = InheritanceType.JOINED)
+@DiscriminatorColumn (name = "employee_type", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorValue(value = "0")
 public class Employee {
+
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.SEQUENCE)
     @Column (name = "idemployee")
     private long id;
     @Column (name = "firstname")

@@ -7,7 +7,7 @@ import java.util.Enumeration;
 @Table (name = "cards")
 public class Card {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "idcard")
     private long id;
     @Column (nullable = false)
