@@ -6,6 +6,7 @@ import java.util.List;
 
 @Entity
 @Table (name = "employees")
+@NamedQuery(name = "consultarTrabajadores", query = "select e from Employee e")
 @Inheritance (strategy = InheritanceType.JOINED)
 @DiscriminatorColumn (name = "employee_type", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue(value = "0")

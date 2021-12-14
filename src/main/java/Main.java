@@ -3,6 +3,8 @@ import entity.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,6 +35,13 @@ public class Main {
             em.persist(d);
             em.persist(d3);
             em.getTransaction().commit();
+
+            Query q = em.createNamedQuery("consultarTrabajadores", Employee.class);
+            List<Employee> l = q.getResultList();
+            for (Employee e9 : l){
+                System.out.println(e9);
+            }
+
             em.close();
             emf.close();
 
